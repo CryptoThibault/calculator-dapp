@@ -8,7 +8,7 @@ function Account() {
   const handleClickGetBalance = async () => {
     try {
       const balance = await web3State.provider.getBalance(address)
-      dispatch('CHANGE_ETH_BALANCE', ethers.utils.formatEther(balance))
+      dispatch({type: 'CHANGE_ETH_BALANCE', payload: ethers.utils.formatEther(balance)})
     } catch (e) {
       console.log(e)
     }
@@ -47,7 +47,7 @@ function Account() {
         type="text"
         value={address}
         placeholder="ethereum address"
-        onChange={(event) => dispatch('CHANGE_ADDRESS', event.target.value)}
+        onChange={(event) => dispatch({type: 'CHANGE_ADDRESS', payload: event.target.value})}
       />
       <button onClick={handleClickGetBalance}>get balance</button>
       <p>
@@ -59,7 +59,7 @@ function Account() {
         type="text"
         placeholder="ether ammount"
         value={sendValue}
-        onChange={(event) => dispatch('CHANGE_SEND_VALUE', event.target.value)}
+        onChange={(event) => dispatch({type: 'CHANGE_SEND_VALUE', payload: event.target.value})}
       />
       <button onClick={handleClickSend}>send</button>
     </div>

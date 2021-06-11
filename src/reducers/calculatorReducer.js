@@ -3,12 +3,12 @@ export const calculatorReducer = (state, action) => {
     case 'CHANGE_ETH_BALANCE': 
       return {
         ...state,
-        ethbalance: action.payload
+        ethBalance: action.payload
     }
     case 'CHANGE_ADDRESS': 
       return {
         ...state,
-        sendAddress: action.payload
+        address: action.payload
     }
     case 'CHANGE_SEND_VALUE':
       return {
