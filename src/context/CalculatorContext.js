@@ -9,7 +9,9 @@ export const CalculatorContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(calculatorReducer, {
     ethBalance: 0,
     address: ethers.constants.AddressZero,
-    sendValue: 0
+    sendValue: 0,
+    calculation: 0,
+    result: 0,
   })
 
   return <CalculatorContext.Provider value={{web3State, login, state, dispatch}}>{children}</CalculatorContext.Provider>

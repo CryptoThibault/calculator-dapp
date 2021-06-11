@@ -28,7 +28,7 @@ function Account() {
     }
   }
   return (
-    <div>
+    <div className="m-5">
     <p>MetaMask installed: {web3State.isMetaMask ? 'yes' : 'no'}</p>
       <p>Web3: {web3State.isWeb3 ? 'injected' : 'no-injected'}</p>
       <p>logged: {web3State.isLogged ? 'yes' : 'no'}</p>
