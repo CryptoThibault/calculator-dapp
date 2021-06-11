@@ -13,21 +13,32 @@ function Calculator() {
   const handleChangeInput = (e) => {
     dispatch({type: 'CHANGE_CALCULATION', payload: e})
   }
-  const handleClickButton = () => {
+  const handleClickResult = () => {
     dispatch({type: 'CHANGE_RESULT', payload: calculate(calculation)})
+  }
+  const handleClickClear = () => {
+    dispatch({type: 'CHANGE_CALCULATION', payload: 0})
   }
 
   return (
-    <div className="bg-success m-5">
-      <div className ="m-3">
+    <div className="btn bg-success m-5">
+      <h1>Calculator</h1>
+      <div className ="btn-group m-3">
         {mapNumbers.map((el, id) => {
           return <Button id={id} calculate={calculate} />
         })}
       </div>
-      <label id="calculation">Write your caculation here</label>
-      <input htmlFor="calculation" value={calculation} onChange={handleChangeInput}></input>
-      <button onClick={handleClickButton}>Get Result</button>
-      <p>Result: {result}</p>
+      <form className="form-inline">
+        <div className="form-group mb-2">
+        <label className="text-light me-5" htmlFor="calculation">Write your caculation here</label>
+        <input className="bg-secondary" id="calculation" value={calculation} onChange={handleChangeInput}></input>
+        </div>
+        <div className="form-group mx-sm-3 mb-2">
+        <button className="btn btn-danger mx-5" type="button" onClick={handleClickResult}>Get Result</button>
+        <button className="btn btn-danger mx-5" type="button" onClick={handleClickClear}>Clear Input</button>
+        <p className="text-light text-start m-2">Result: {result}</p>
+        </div>
+      </form>
     </div>
   );
 };
