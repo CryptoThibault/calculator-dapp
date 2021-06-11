@@ -1,4 +1,8 @@
-function Button({id}) {
+import { useCalculator } from "../context/CalculatorContext";
+
+function Button({id, calculate}) {
+  const { state, dispatch } = useCalculator()
+  const { calculation } = state
   if (id > 9) {
   switch (id) {
     case 10: id = '+'; break
@@ -11,8 +15,16 @@ function Button({id}) {
     default: throw new Error(`${id} is not a valid id`)
   }
 }
+
+  const handleButtonClick = (e) => {
+    if (e === "=") {
+      dispatch({type: 'CHANGE_RESULT', payload: calculate(calculation) })
+    } else {
+      dispatch({type: 'CHANGE_CALCULATION', payload: !!calculation ? calculation + e.target.value : e.taget.value})
+    }   
+  }
   return (
-    <button key={id}>
+    <button key={id} value={id} onClick={(e) => handleButtonClick(e)}>
       {id}
     </button>
   );

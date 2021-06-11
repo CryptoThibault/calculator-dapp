@@ -1,20 +1,29 @@
-import {useCalculator} from '../context/CalculatorContext'
+import { useCalculator } from '../context/CalculatorContext'
 import Button from './Button';
 
 function Calculator() {
-  const { state } = useCalculator()
+  const { state, dispatch } = useCalculator()
   const { calculation, result } = state
   const mapNumbers = Array(17).fill('_')
+
+  const calculate = (str) => {
+
+  }
+
+  const handleChangeInput = (e) => {
+    dispatch({type: 'CHANGE_CALCULATION', payload: e})
+  }
+
   return (
     <div className="bg-success m-5">
       <div className ="m-3">
         {mapNumbers.map((el, id) => {
-          return <Button id={id} />
+          return <Button id={id} calculate={calculate} />
         })}
       </div>
       <label id="calculation">Write your caculation here</label>
-      <input htmlFor="calculation" value={calculation}></input>
-      <button>Get Result</button>
+      <input htmlFor="calculation" value={calculation} onChange={(e) => handleChangeInput(e)}></input>
+      <button onClick={() => calculate(calculation)}>Get Result</button>
       <p>Result: {result}</p>
     </div>
   );
