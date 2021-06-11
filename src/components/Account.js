@@ -28,7 +28,7 @@ function Account() {
     }
   }
   return (
-    <div className="btn bg-primary m-5">
+    <div className="btn bg-primary m-4">
       <h1>Account</h1>
       <div className="row">
         <p className="col-4">MetaMask installed: {web3State.isMetaMask ? '✅' : '❌'}</p>

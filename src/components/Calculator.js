@@ -21,7 +21,7 @@ function Calculator() {
   }
 
   return (
-    <div className="btn bg-success m-5">
+    <div className="btn bg-success m-4">
       <h1>Calculator</h1>
       <div className ="btn-group m-3">
         {mapNumbers.map((el, id) => {
