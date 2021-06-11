@@ -13,6 +13,9 @@ function Calculator() {
   const handleChangeInput = (e) => {
     dispatch({type: 'CHANGE_CALCULATION', payload: e})
   }
+  const handleClickButton = () => {
+    dispatch({type: 'CHANGE_RESULT', payload: calculate(calculation)})
+  }
 
   return (
     <div className="bg-success m-5">
@@ -22,8 +25,8 @@ function Calculator() {
         })}
       </div>
       <label id="calculation">Write your caculation here</label>
-      <input htmlFor="calculation" value={calculation} onChange={(e) => handleChangeInput(e)}></input>
-      <button onClick={() => calculate(calculation)}>Get Result</button>
+      <input htmlFor="calculation" value={calculation} onChange={handleChangeInput}></input>
+      <button onClick={handleClickButton}>Get Result</button>
       <p>Result: {result}</p>
     </div>
   );
