@@ -1,7 +1,8 @@
 import { calculatorReducer } from "../reducers/calculatorReducer"
 import { ethers } from "ethers"
 import { createContext, useContext, useReducer } from "react";
-import { Web3Context } from "web3-hooks";
+import { useContract, Web3Context } from "web3-hooks";
+import {calculatorAddress, calculatorAbi} from "../contracts/Calculator-abi";
 
 export const CalculatorContext = createContext()
 export const CalculatorContextProvider = ({ children }) => {
@@ -13,8 +14,8 @@ export const CalculatorContextProvider = ({ children }) => {
     calculation: 0,
     result: 0,
   })
-
-  return <CalculatorContext.Provider value={{web3State, login, state, dispatch}}>{children}</CalculatorContext.Provider>
+  const calculator = useContract(calculatorAddress, calculatorAbi)
+  return <CalculatorContext.Provider value={{web3State, login, state, dispatch, calculator}}>{children}</CalculatorContext.Provider>
 };
 export const useCalculator = () => {
   const context = useContext(CalculatorContext)

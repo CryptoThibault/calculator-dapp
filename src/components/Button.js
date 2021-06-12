@@ -27,7 +27,7 @@ function Button({id, calculate}) {
   }
   return (
     <button className="btn btn-secondary" key={id} value={id} onClick={handleButtonClick}>
-      {id}
+      <strong>{id}</strong>
     </button>
   );
 };

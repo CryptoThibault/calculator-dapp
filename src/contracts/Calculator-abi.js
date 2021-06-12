@@ -1,5 +1,5 @@
-const ContractAddress = "0xC440ee04a3D964Ea56Fa48Dc2D0eA298c53B971D"
-const ContractAbi = [
+export const calculatorAddress = "0xC440ee04a3D964Ea56Fa48Dc2D0eA298c53B971D"
+export const calculatorAbi = [
 	{
 		"inputs": [
 			{
