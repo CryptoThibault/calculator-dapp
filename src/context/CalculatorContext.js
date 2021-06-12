@@ -11,7 +11,7 @@ export const CalculatorContextProvider = ({ children }) => {
     ethBalance: 0,
     address: ethers.constants.AddressZero,
     sendValue: 0,
-    calculation: 0,
+    calculation: '0',
     result: 0,
   })
   const calculator = useContract(calculatorAddress, calculatorAbi)

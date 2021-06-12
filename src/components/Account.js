@@ -22,7 +22,6 @@ function Account() {
         value: weiAmount,
       })
       await tx.wait()
-      console.log('TX MINED')
     } catch (e) {
       console.log(e)
     }

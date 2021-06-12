@@ -6,8 +6,10 @@ function Calculator() {
   const { calculation, result } = state
   const mapNumbers = Array(17).fill('_')
 
-  const calculate = (str) => {
-    let x, y, op
+  const calculate = () => {
+    let x = ''
+    let y = ''
+    let op = ''
     let yTurn = false
 
     const unitCalc = async () => {
@@ -21,7 +23,9 @@ function Calculator() {
       }
     }
 
-    for (let el of str) {
+    console.log(calculation)
+    for (let el of calculation) {
+      console.log(typeof el)
      if (!isNaN(el) && !yTurn) {
        x += el
      }
@@ -31,14 +35,14 @@ function Calculator() {
      if (isNaN(el)) {
        if (yTurn) {
          x = unitCalc(Number(x), Number(y))
+         y = ''
        }
        op = el
        yTurn = true
      }
     }
-   
 
-    return y === undefined ? x :  unitCalc(Number(x), Number(y))
+    return yTurn ? unitCalc(Number(x), Number(y)) : x
   }
 
   const handleChangeInput = (e) => {
@@ -65,7 +69,7 @@ function Calculator() {
         </div>
         <div className="form-group mx-sm-3 mb-2">
           <button className="btn btn-danger mx-5" type="button" onClick={handleClickResult}>Get Result</button>
-          <button className="btn btn-danger mx-5" type="button" onClick={() => handleChangeInput(0)}>Clear Input</button>
+          <button className="btn btn-danger mx-5" type="button" onClick={() => handleChangeInput('0')}>Clear Input</button>
           <p className="text-light text-start m-2">Result: {result}</p>
         </div>
       </form>

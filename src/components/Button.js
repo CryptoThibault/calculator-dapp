@@ -22,11 +22,11 @@ function Button({id, calculate}) {
     if (id === '=') {
       dispatch({type: 'CHANGE_RESULT', payload: calculate(calculation) })
     } else {
-      dispatch({type: 'CHANGE_CALCULATION', payload: id === 'c' ? 0 : calculation ? calculation + id : id})
+      dispatch({type: 'CHANGE_CALCULATION', payload: id === 'c' ? '0' : calculation !== '0' ? calculation + id : id})
     }   
   }
   return (
-    <button className="btn btn-secondary" key={id} value={id} onClick={handleButtonClick}>
+    <button className="btn btn-secondary" key={id} onClick={handleButtonClick}>
       <strong>{id}</strong>
     </button>
   );
