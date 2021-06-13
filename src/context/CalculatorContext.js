@@ -2,7 +2,7 @@ import { calculatorReducer } from "../reducers/calculatorReducer"
 import { ethers } from "ethers"
 import { createContext, useContext, useReducer } from "react";
 import { useContract, Web3Context } from "web3-hooks";
-import {calculatorAddress, calculatorAbi} from "../contracts/Calculator-abi";
+import { calculatorAddress, calculatorAbi } from "../contracts/Calculator-abi";
 
 export const CalculatorContext = createContext()
 export const CalculatorContextProvider = ({ children }) => {

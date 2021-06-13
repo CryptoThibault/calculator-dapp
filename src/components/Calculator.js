@@ -6,26 +6,29 @@ function Calculator() {
   const { calculation, result } = state
   const mapNumbers = Array(17).fill('_')
 
-  const calculate = () => {
+  const calculate = async () => {
     let x = ''
     let y = ''
     let op = ''
     let yTurn = false
 
     const unitCalc = async () => {
+      let unit
       switch (op) {
-        case '+': return await calculator.add(x, y)
-        case '-': return await calculator.sub(x, y)
-        case '*': return await calculator.mul(x, y)
-        case '/': return await calculator.div(x, y)
-        case '%': return await calculator.mod(x, y)
-        default: return 'Error unitCalc'
+        case '+': unit = await calculator.add(x, y); break
+        case '-': unit = await calculator.sub(x, y); break
+        case '*': unit = await calculator.mul(x, y); break
+        case '/': unit = await calculator.div(x, y); break
+        case '%': unit = await calculator.mod(x, y); break
+        default: console.log('Error unitCalc')
       }
+      console.log('before:', unit)
+      unit = unit.toString()
+      console.log('after:', unit)
+      return unit // Error when return Number
     }
 
-    console.log(calculation)
     for (let el of calculation) {
-      console.log(typeof el)
      if (!isNaN(el) && !yTurn) {
        x += el
      }
@@ -41,12 +44,15 @@ function Calculator() {
        yTurn = true
      }
     }
-
-    return yTurn ? unitCalc(Number(x), Number(y)) : x
+    console.log(x,' ', op, ' ', y, ' ', yTurn)
+    let res = yTurn ? await unitCalc(Number(x), Number(y)) : x
+    console.log('result:', res)
+    return Number(res)
   }
+  console.log(result)
 
   const handleChangeInput = (e) => {
-    dispatch({type: 'CHANGE_CALCULATION', payload: e})
+    dispatch({type: 'CHANGE_CALCULATION', payload: e === '0' ? e : e.target.value})
   }
   const handleClickResult = () => {
     dispatch({type: 'CHANGE_RESULT', payload: calculate(calculation)})
@@ -59,7 +65,7 @@ function Calculator() {
       <h1>Calculator</h1>
       <div className ="btn-group m-3">
         {mapNumbers.map((el, id) => {
-          return <Button id={id} calculate={calculate} />
+          return <Button key={id} id={id} calculate={calculate} />
         })}
       </div>
       <form className="form-inline">

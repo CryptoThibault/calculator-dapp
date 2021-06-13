@@ -20,13 +20,13 @@ function Button({id, calculate}) {
 
   const handleButtonClick = () => {
     if (id === '=') {
-      dispatch({type: 'CHANGE_RESULT', payload: calculate(calculation) })
+      dispatch({ type: 'CHANGE_RESULT', payload: calculate(calculation) })
     } else {
-      dispatch({type: 'CHANGE_CALCULATION', payload: id === 'c' ? '0' : calculation !== '0' ? calculation + id : id})
+      dispatch({ type: 'CHANGE_CALCULATION', payload: id === 'c' ? '0' : calculation !== '0' ? calculation + id : id })
     }   
   }
   return (
-    <button className="btn btn-secondary" key={id} onClick={handleButtonClick}>
+    <button className="btn btn-secondary" onClick={handleButtonClick}>
       <strong>{id}</strong>
     </button>
   );
