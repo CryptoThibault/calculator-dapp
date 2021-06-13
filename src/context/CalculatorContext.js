@@ -13,6 +13,7 @@ export const CalculatorContextProvider = ({ children }) => {
     sendValue: 0,
     calculation: '0',
     result: 0,
+    donation: 0,
   })
   const calculator = useContract(calculatorAddress, calculatorAbi)
   return <CalculatorContext.Provider value={{web3State, login, state, dispatch, calculator}}>{children}</CalculatorContext.Provider>

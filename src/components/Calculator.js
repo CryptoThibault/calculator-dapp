@@ -1,9 +1,10 @@
 import { useCalculator } from '../context/CalculatorContext'
 import Button from './Button';
+import { ethers } from 'ethers'
 
 function Calculator() {
   const { web3State, state, dispatch, calculator } = useCalculator()
-  const { calculation, result } = state
+  const { calculation, result, donation } = state
   const mapNumbers = Array(17).fill('_')
 
   const calculate = async () => {
@@ -46,7 +47,23 @@ function Calculator() {
   }
 
   const handleChangeInput = (e) => {
-    dispatch({type: 'CHANGE_CALCULATION', payload: e === '0' ? e : e.target.value})
+    dispatch({ type: 'CHANGE_CALCULATION', payload: e === '0' ? e : e.target.value })
+  }
+  const handleChangeDonation = (e) => {
+    dispatch({ type: 'CHANGE_DONATION', payload: e.target.value })
+  }
+
+  const handleClickDonate = async () => {
+    const weiAmount = ethers.utils.parseEther(donation)
+    try {
+      const tx = await web3State.signer.sendTransaction({
+        to: "0x166bb3346c83fDf9Bc0e693DA09a271F7E9F4C79",//process.env.OWNER_ADDRESS,
+        value: weiAmount,
+      })
+      await tx.wait()
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -62,12 +79,17 @@ function Calculator() {
       <form className="form-inline">
         <div className="form-group mb-2">
           <label className="text-light me-5" htmlFor="calculation">You can also write here:</label>
-          <input className="bg-secondary text-light text-center" id="calculation" value={calculation} onChange={handleChangeInput}></input>
+          <input className="bg-secondary text-light text-center" id="calculation" value={calculation} onChange={handleChangeInput}/>
         </div>
         <div className="form-group mx-sm-3 mb-2">
           <button className="btn btn-danger mx-5" type="button" onClick={() => calculate(calculation)}>Get Result</button>
           <button className="btn btn-danger mx-5" type="button" onClick={() => handleChangeInput('0')}>Clear Input</button>
-          <p className="text-light text-start m-2">Result: {result}</p>
+        </div>
+          <p className="text-light text-start mx-5">Result: {result}</p>
+        <div className="form-group mb-2 text-end">
+          <label className="text-light me-3" htmlFor="donation">Donation</label>
+          <input type="number" value={donation} onChange={handleChangeDonation} className="text-center me-2" id="donation"/>
+          <button className="btn btn-primary" onClick={handleClickDonate}>Send</button>
         </div>
       </form>
     </div>

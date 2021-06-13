@@ -21,10 +21,15 @@ export const calculatorReducer = (state, action) => {
         calculation: action.payload
       }
     case 'CHANGE_RESULT':
-        return {
-          ...state,
-          result: action.payload
-        }
+      return {
+        ...state,
+        result: action.payload
+      }
+    case 'CHANGE_DONATION':
+      return {
+        ...state,
+        donation: action.payload
+      }
     default:
       throw new Error(`Unsupported action type ${action.type}`)
   }
