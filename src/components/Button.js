@@ -20,7 +20,7 @@ function Button({id, calculate}) {
 
   const handleButtonClick = () => {
     if (id === '=') {
-      dispatch({ type: 'CHANGE_RESULT', payload: calculate(calculation) })
+      calculate(calculation)
     } else {
       dispatch({ type: 'CHANGE_CALCULATION', payload: id === 'c' ? '0' : calculation !== '0' ? calculation + id : id })
     }   

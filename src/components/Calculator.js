@@ -22,10 +22,7 @@ function Calculator() {
         case '%': unit = await calculator.mod(x, y); break
         default: console.log('Error unitCalc')
       }
-      console.log('before:', unit)
-      unit = unit.toString()
-      console.log('after:', unit)
-      return unit // Error when return Number
+      return unit.toString()
     }
 
     for (let el of calculation) {
@@ -44,18 +41,12 @@ function Calculator() {
        yTurn = true
      }
     }
-    console.log(x,' ', op, ' ', y, ' ', yTurn)
     let res = yTurn ? await unitCalc(Number(x), Number(y)) : x
-    console.log('result:', res)
-    return Number(res)
+    dispatch({ type: 'CHANGE_RESULT', payload: Number(res) })
   }
-  console.log(result)
 
   const handleChangeInput = (e) => {
     dispatch({type: 'CHANGE_CALCULATION', payload: e === '0' ? e : e.target.value})
-  }
-  const handleClickResult = () => {
-    dispatch({type: 'CHANGE_RESULT', payload: calculate(calculation)})
   }
 
   return (
@@ -74,7 +65,7 @@ function Calculator() {
           <input className="bg-secondary text-light text-center" id="calculation" value={calculation} onChange={handleChangeInput}></input>
         </div>
         <div className="form-group mx-sm-3 mb-2">
-          <button className="btn btn-danger mx-5" type="button" onClick={handleClickResult}>Get Result</button>
+          <button className="btn btn-danger mx-5" type="button" onClick={() => calculate(calculation)}>Get Result</button>
           <button className="btn btn-danger mx-5" type="button" onClick={() => handleChangeInput('0')}>Clear Input</button>
           <p className="text-light text-start m-2">Result: {result}</p>
         </div>
